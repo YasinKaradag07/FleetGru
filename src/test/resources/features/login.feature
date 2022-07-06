@@ -9,7 +9,9 @@ Feature: FleetGru App Login Feature
   Background:
     Given the user is on the login page
 
+    @FLT-1824 @wip
     Scenario Template: user is able to login with valid credentials as a truck driver verification
+
       When the truck driver user enters username "<username>"
       And the truck driver user enters password "<password>"
       And the truck driver user clicks enter or login button
@@ -30,8 +32,9 @@ Feature: FleetGru App Login Feature
         | user191  |  | UserUser123 |
         | user200  |  | UserUser123 |
 
-
+@FLT-1825 @wip
   Scenario Template: user is able to login with valid credentials as a store manager and sales manager verification
+
     When the sales manager or store manager user enters username "<username>"
     And the sales manager or store manager user enters password "<password>"
     And the sales manager or store manager user clicks enter or login button
@@ -63,9 +66,10 @@ Feature: FleetGru App Login Feature
       | salesmanager291 |  | UserUser123 |
       | salesmanager300 |  | UserUser123 |
 
-
+@FLT-1826 @wip
   Scenario Template: "Invalid username or password." should be displayed for invalid
     (valid username-invalid password and invalid username-valid password) credentials
+
     When the user enters username "<invalidUsername>" and password "<invalidPassword>"
     And the user clicks enter or login button
     Then the user should see warning message
@@ -80,30 +84,90 @@ Feature: FleetGru App Login Feature
       |storemanager51  |  |UserUser321     |
       |storemanager45  |  |UserUser123     |
 
-
+@FLT-1827 @wip
   Scenario: "Please fill out this field" message should be displayed if the password or username is empty
 
       When the user does not fill username or password
       And the user clicks on login button
       Then the user should be able to see warning message on login page
 
-
+@FLT-1828 @wip
   Scenario: User land on the ‘Forgot Password’ page after clicking on the "Forgot your password?" link
+
     When the user clicks forgot password button
     Then the user should land on forgot password page
 
-
+@FLT-1829 @wip
   Scenario: User can see "Remember Me" link exists and is clickable on the login page
+
     When the user is able to see remember me link
     Then the user should be able to click checkbox
 
+@FLT-1830 @wip
+  Scenario: User should see the password in bullet signs by default
 
-    Scenario: User should see the password in bullet signs by default
       When the user enters password
       Then the user should see the password in bullet signs
 
-  @wip
-    Scenario: Verify if the ‘Enter’ key of the keyboard is working correctly on the login page.
-    When the user enters valid credentials
-    And the user hits enter key instead of clicking login button
+@FLT-1831 @wip
+  Scenario: Verify if the ‘Enter’ key of the keyboard is working correctly on the login page.
+
+    When the user enters valid credentials and hits enter key instead of clicking login button
     Then the user should be able to navigate correct page
+
+ @FLT-1832 @wip
+    Scenario Template: All users can see their own usernames in the profile menu, after successful login, for truck driver
+
+    When the truck driver user enters username "<username>"
+    And the truck driver user enters password "<password>"
+    And the truck driver user clicks enter or login button
+    Then the truck driver user can see username "<username>" in profile menu on Quick Launchpad page
+
+    Examples: Truck drivers role
+
+      | username |  | password    |
+      | user1    |  | UserUser123 |
+      | user11   |  | UserUser123 |
+      | user21   |  | UserUser123 |
+      | user31   |  | UserUser123 |
+      | user41   |  | UserUser123 |
+      | user151  |  | UserUser123 |
+      | user161  |  | UserUser123 |
+      | user171  |  | UserUser123 |
+      | user181  |  | UserUser123 |
+      | user191  |  | UserUser123 |
+      | user200  |  | UserUser123 |
+
+  @FLT-1833 @wip
+  Scenario Template: All users can see their own usernames in the profile menu, after successful login, for sales manager and store manager
+
+    When the sales manager or store manager user enters username "<username>"
+    And the sales manager or store manager user enters password "<password>"
+    And the sales manager or store manager user clicks enter or login button
+    Then the sales manager or store manager user can see username "<username>" in profile menu on Dashboard page
+
+    Examples: store manager and sales manager role
+
+      | username        |  | password    |
+      | storemanager51  |  | UserUser123 |
+      | storemanager61  |  | UserUser123 |
+      | storemanager71  |  | UserUser123 |
+      | storemanager81  |  | UserUser123 |
+      | storemanager91  |  | UserUser123 |
+      | storemanager201 |  | UserUser123 |
+      | storemanager211 |  | UserUser123 |
+      | storemanager221 |  | UserUser123 |
+      | storemanager231 |  | UserUser123 |
+      | storemanager241 |  | UserUser123 |
+      | storemanager250 |  | UserUser123 |
+      | salesmanager101 |  | UserUser123 |
+      | salesmanager111 |  | UserUser123 |
+      | salesmanager121 |  | UserUser123 |
+      | salesmanager131 |  | UserUser123 |
+      | salesmanager141 |  | UserUser123 |
+      | salesmanager251 |  | UserUser123 |
+      | salesmanager261 |  | UserUser123 |
+      | salesmanager271 |  | UserUser123 |
+      | salesmanager281 |  | UserUser123 |
+      | salesmanager291 |  | UserUser123 |
+      | salesmanager300 |  | UserUser123 |

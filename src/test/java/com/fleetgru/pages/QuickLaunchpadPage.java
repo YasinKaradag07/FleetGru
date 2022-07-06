@@ -8,4 +8,6 @@ public class QuickLaunchpadPage extends BasePage{
     @FindBy(xpath = "//h1[.='Quick Launchpad']")
     public WebElement quickLaunchpad;
 
+    @FindBy(xpath = "//li[@id='user-menu']/a")
+    public WebElement profileMenu;
 }

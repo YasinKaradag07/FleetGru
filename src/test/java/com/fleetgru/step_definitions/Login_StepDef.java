@@ -11,6 +11,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -147,5 +148,35 @@ public class Login_StepDef {
         Assert.assertEquals(expectedPasswordBoxType,actualPasswordBoxType);
     }
 
+    @When("the user enters valid credentials and hits enter key instead of clicking login button")
+    public void the_user_enters_valid_credentials_and_hits_enter_key_instead_of_clicking_login_button() {
+        loginPage.usernameBox.sendKeys("user1");
+        loginPage.passwordBox.sendKeys("UserUser123"+ Keys.ENTER);
+    }
+
+    @Then("the user should be able to navigate correct page")
+    public void the_user_should_be_able_to_navigate_correct_page() {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        wait.until(ExpectedConditions.invisibilityOf(loginPage.loadingBar));
+        String actualPage = quickLaunchpadPage.quickLaunchpad.getText();
+        String expectedPage = "Quick Launchpad";
+        Assert.assertEquals(expectedPage,actualPage);
+    }
+
+    @Then("the truck driver user can see username {string} in profile menu on Quick Launchpad page")
+    public void the_truck_driver_user_can_see_username_in_profile_menu_on_quick_launchpad_page(String username) {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        wait.until(ExpectedConditions.invisibilityOf(loginPage.loadingBar));
+        String actualName = quickLaunchpadPage.profileMenu.getText();
+        Assert.assertEquals(username,actualName);
+    }
+
+    @Then("the sales manager or store manager user can see username {string} in profile menu on Dashboard page")
+    public void the_sales_manager_or_store_manager_user_can_see_username_in_profile_menu_on_dashboard_page(String username) {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        wait.until(ExpectedConditions.invisibilityOf(loginPage.loadingBar));
+        String actualName = quickLaunchpadPage.profileMenu.getText();
+        Assert.assertEquals(username,actualName);
+    }
 
 }
