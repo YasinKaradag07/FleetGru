@@ -3,9 +3,9 @@ package com.fleetgru.step_definitions;
 import com.fleetgru.pages.DashboardPage;
 import com.fleetgru.pages.LoginPage;
 import com.fleetgru.pages.QuickLaunchpadPage;
-import com.fleetgru.utilities.BrowserUtils;
 import com.fleetgru.utilities.ConfigurationReader;
 import com.fleetgru.utilities.Driver;
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -19,6 +19,7 @@ public class Login_StepDef {
     LoginPage loginPage = new LoginPage();
     DashboardPage dashboardPage = new DashboardPage();
     QuickLaunchpadPage quickLaunchpadPage = new QuickLaunchpadPage();
+
 
     @Given("the user is on the login page")
     public void theUserIsOnTheLoginPage() {
@@ -89,6 +90,61 @@ public class Login_StepDef {
         String actualMessage = loginPage.invalidCredentialsMessage.getText();
         String expectedMessage = "Invalid user name or password.";
         Assert.assertEquals(expectedMessage,actualMessage);
+    }
+
+    @When("the user does not fill username or password")
+    public void the_user_does_not_fill_username_or_password() {
+        loginPage.usernameBox.sendKeys("");
+        loginPage.passwordBox.sendKeys("UserUser123");
+    }
+
+    @When("the user clicks on login button")
+    public void the_user_clicks_on_login_button() {
+        loginPage.loginButton.click();
+    }
+
+    @Then("the user should be able to see warning message on login page")
+    public void the_user_should_be_able_to_see_warning_message_on_login_page() {
+       String expectedWarningMessage = "Please fill in this field.";
+       String actualWarningMessage = loginPage.usernameBox.getAttribute("validationMessage");
+       Assert.assertEquals(expectedWarningMessage,actualWarningMessage);
+    }
+
+    @When("the user clicks forgot password button")
+    public void the_user_clicks_forgot_password_button() {
+       loginPage.forgotPasswordLink.click();
+    }
+
+    @Then("the user should land on forgot password page")
+    public void the_user_should_land_on_forgot_password_page() {
+       String actualForgotPasswordPageTitle = Driver.getDriver().getTitle();
+       String expectedForgotPasswordPageTitle = "Forgot Password";
+       Assert.assertEquals(expectedForgotPasswordPageTitle,actualForgotPasswordPageTitle);
+    }
+
+    @When("the user is able to see remember me link")
+    public void the_user_is_able_to_see_remember_me_link() {
+        String actualRememberMeLinkText = loginPage.rememberMeLink.getText();
+        String expectedRememberMeLinkText = "Remember me on this computer";
+        Assert.assertEquals(expectedRememberMeLinkText,actualRememberMeLinkText);
+    }
+
+    @Then("the user should be able to click checkbox")
+    public void the_user_should_be_able_to_click_checkbox() {
+        loginPage.rememberMeCheckbox.click();
+    }
+
+    @When("the user enters password")
+    public void the_user_enters_password() {
+        Faker faker = new Faker();
+        loginPage.passwordBox.sendKeys(faker.bothify("##?###?#"));
+    }
+
+    @Then("the user should see the password in bullet signs")
+    public void the_user_should_see_the_password_in_bullet_signs() {
+        String expectedPasswordBoxType = "password";
+        String actualPasswordBoxType = loginPage.passwordBox.getAttribute("type");
+        Assert.assertEquals(expectedPasswordBoxType,actualPasswordBoxType);
     }
 
 

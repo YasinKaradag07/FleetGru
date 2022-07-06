@@ -20,4 +20,14 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//div[.='Invalid user name or password.']")
     public WebElement invalidCredentialsMessage;
 
+    @FindBy(xpath = "//a[.='Forgot your password?']")
+    public WebElement forgotPasswordLink;
+
+    @FindBy(xpath = "//span[@class='custom-checkbox__text']")
+    public WebElement rememberMeLink;
+
+    @FindBy(xpath = "//span[@class='custom-checkbox__icon']")
+    public WebElement rememberMeCheckbox;
+
+
 }

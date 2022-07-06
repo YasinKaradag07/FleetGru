@@ -63,13 +63,12 @@ Feature: FleetGru App Login Feature
       | salesmanager291 |  | UserUser123 |
       | salesmanager300 |  | UserUser123 |
 
-  @wip
-    Scenario Template: "Invalid username or password." should be displayed for invalid
-    (valid username-invalid password and invalid username-valid password) credentials
 
-      When the user enters username "<invalidUsername>" and password "<invalidPassword>"
-      And the user clicks enter or login button
-      Then the user should see warning message
+  Scenario Template: "Invalid username or password." should be displayed for invalid
+    (valid username-invalid password and invalid username-valid password) credentials
+    When the user enters username "<invalidUsername>" and password "<invalidPassword>"
+    And the user clicks enter or login button
+    Then the user should see warning message
 
     Examples: Invalid credentials
 
@@ -80,3 +79,31 @@ Feature: FleetGru App Login Feature
       |salesmanager300 |  |UserUser125     |
       |storemanager51  |  |UserUser321     |
       |storemanager45  |  |UserUser123     |
+
+
+  Scenario: "Please fill out this field" message should be displayed if the password or username is empty
+
+      When the user does not fill username or password
+      And the user clicks on login button
+      Then the user should be able to see warning message on login page
+
+
+  Scenario: User land on the ‘Forgot Password’ page after clicking on the "Forgot your password?" link
+    When the user clicks forgot password button
+    Then the user should land on forgot password page
+
+
+  Scenario: User can see "Remember Me" link exists and is clickable on the login page
+    When the user is able to see remember me link
+    Then the user should be able to click checkbox
+
+
+    Scenario: User should see the password in bullet signs by default
+      When the user enters password
+      Then the user should see the password in bullet signs
+
+  @wip
+    Scenario: Verify if the ‘Enter’ key of the keyboard is working correctly on the login page.
+    When the user enters valid credentials
+    And the user hits enter key instead of clicking login button
+    Then the user should be able to navigate correct page
