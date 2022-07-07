@@ -6,19 +6,13 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        plugin = {
-                //"pretty",
+        plugin = {"json:target/cucumber.json",
                 "html:target/cucumber-report.html",
-                "rerun:target/rerun.txt",
-                "me.jvt.cucumber.report.PrettyReports:target/cucumber",
-                "json:target/Cucumber.json"
-        },
-        //monochrome = true,
+                "rerun:target/rerun.txt"},
         features = "src/test/resources/features",
         glue = "com/fleetgru/step_definitions",
         dryRun = false,
-        tags = "@smoke",
-        publish = false
+        tags = "@wip"
 )
 
 public class CukesRunner {

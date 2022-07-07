@@ -9,7 +9,7 @@ Feature: FleetGru App Login Feature
   Background:
     Given the user is on the login page
 
-    @FLT-1824 @wip @smoke
+    @FLT-1824 @wip
     Scenario Outline: user is able to login with valid credentials as a truck driver verification
 
       When the truck driver user enters username "<username>"
