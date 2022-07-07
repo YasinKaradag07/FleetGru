@@ -11,11 +11,13 @@ import org.junit.runner.RunWith;
                 "html:target/cucumber-report.html",
                 "rerun:target/rerun.txt",
                 "me.jvt.cucumber.report.PrettyReports:target/cucumber",
+                "json:target/Cucumber.json"
         },
+        //monochrome = true,
         features = "src/test/resources/features",
         glue = "com/fleetgru/step_definitions",
         dryRun = false,
-        tags = "@wip",
+        tags = "@smoke",
         publish = false
 )
 
